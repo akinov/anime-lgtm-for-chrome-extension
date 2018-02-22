@@ -4,7 +4,8 @@
   "version": "0.1",
   "permissions": [
     "tabs",
-    "storage"
+    "storage",
+    "clipboardRead"
   ],
   "browser_action": {
     "default_icon": "images/icon.png"
