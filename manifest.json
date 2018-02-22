@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "description": "",
+  "version": "0.1",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon_off.png"
+  },
+  "background": {
+    "scripts": ["javascripts/background.js"]
+  },
+  "content_scripts" : [{
+    "js" : [
+      "javascripts/lib/jquery.js",
+      "javascripts/content.js"
+    ]
+  }],
+  "manifest_version": 2
+}
