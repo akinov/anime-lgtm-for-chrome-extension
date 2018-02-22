@@ -13,10 +13,7 @@
     "scripts": ["javascripts/background.js"]
   },
   "content_scripts" : [{
-    "matches" : [
-      "http://*/*",
-      "https://*/*"
-    ],
+    "matches" : ["*://*/*"],
     "js" : [
       "javascripts/lib/jquery.js",
       "javascripts/content.js"
