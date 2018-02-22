@@ -2,8 +2,7 @@ var currentTab = null;
 
 // clicked Browser Action
 chrome.browserAction.onClicked.addListener(function(tab) {
-  currentTab = tab;
-  chrome.browserAction.setPopup({ "popup": "popup.html" });
+  
 });
 
 // Messageリスナー
