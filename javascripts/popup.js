@@ -15,6 +15,12 @@ $(function(){
   $(document).on('click', '.image', function() {
     copyToClipboard('![LGTM](' + $(this).attr('src') + ')');
   });
+
+  $('#reload').on('click', function(){
+    $('#images').hide().empty();
+    $('#loader').show();
+    setImage();
+  });
 });
 
 function loadImage() {
