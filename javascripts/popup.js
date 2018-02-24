@@ -35,19 +35,25 @@ function loadImage() {
     // ストレージ登録
     chrome.storage.local.set({ 'imageUrls': imageUrls });
 
-    setImage();
+    if (!imageAdded) {
+      setImage();
+    }
   });
 }
 
 function setImage() {
-  if (imageAdded) return;
   imageAdded = true;
   [
     Math.floor(Math.random() * imageUrls.length),
     Math.floor(Math.random() * imageUrls.length),
     Math.floor(Math.random() * imageUrls.length)
   ].forEach(function(val, index, ar) {
-    $('body').append($("<img />").attr('src', imageUrls[val]).addClass('image'));
+    $image = $("<img />").attr('src', imageUrls[val]).addClass('image');
+    $image.bind("load", function(){
+      $('#loader').hide();
+      $('#images').show();
+    });
+    $('#images').append($image);
   });
 }
 

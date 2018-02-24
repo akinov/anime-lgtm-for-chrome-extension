@@ -2,6 +2,15 @@ body {
   width: 200px;
 }
 
+#loader {
+  padding: 20px;
+  text-align: center;
+}
+
+#images {
+  display: none;
+}
+
 .image {
   width: 100%;
 }
