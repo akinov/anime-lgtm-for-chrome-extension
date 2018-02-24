@@ -1,19 +1,55 @@
+var imageUrls = [];
+var imageAdded = false;
+
 $(function(){
-  alert(123);
-  // ストレージの取得雛形
-  // chrome.storage.local.get('hoge', function(items) {
-  //   console.log(items);
-  // });
+  // ストレージの取得
+  chrome.storage.local.get(['imageUrls'], function(items) {
+    if (items.imageUrls) {
+      imageUrls = items.imageUrls;
+      setImage();
+    }
+    loadImage();
+  });
 
-  // ストレージ登録雛形
-  // chrome.storage.local.set({ 'hoge': 'hoge' });
-
-  // https://www.google.co.jp/search?tbm=isch&q=LGTM+%E3%82%A2%E3%83%8B%E3%83%A1&spell=1&sa=X
 
   $(document).on('click', '.image', function() {
-    copyToClipboard($(this).text());
+    copyToClipboard('![LGTM](' + $(this).attr('src') + ')');
   });
 });
+
+function loadImage() {
+  $.ajax({
+    url: "https://anime-lgtm.herokuapp.com/lgtm_images",
+    type: 'GET',
+    dataType:'json'
+  })
+  .done(function(data){
+    if (data) {
+      data.forEach(function(val, index, ar) {
+        if (!imageUrls.includes(val.url)) {
+          imageUrls.push(val.url);
+        }
+      });
+    }
+
+    // ストレージ登録
+    chrome.storage.local.set({ 'imageUrls': imageUrls });
+
+    setImage();
+  });
+}
+
+function setImage() {
+  if (imageAdded) return;
+  imageAdded = true;
+  [
+    Math.floor(Math.random() * imageUrls.length),
+    Math.floor(Math.random() * imageUrls.length),
+    Math.floor(Math.random() * imageUrls.length)
+  ].forEach(function(val, index, ar) {
+    $('body').append($("<img />").attr('src', imageUrls[val]).addClass('image'));
+  });
+}
 
 function copyToClipboard(text) {
   const input = document.createElement('input');
