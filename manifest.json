@@ -2,6 +2,7 @@
   "name": "Anime LGTM",
   "description": "Display a list of animated LGTM images",
   "version": "0.1",
+  "author": "akinov",
   "permissions": [
     "tabs",
     "storage",
